@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import settings
 import requests
 from urllib.parse import quote
 
@@ -14,21 +15,14 @@ from urllib.parse import quote
 # https://note.nkmk.me/python-f-strings/
 #$ pip install --upgrade google-api-python-client
 
-# API KEY
-API_KEY = "AIzaSyBLkBcZhF7n-zP8Z70juq7v9y4f_04Hl3k"
-# 検索エンジンID 
-CUSTOM_SEARCH_ENGINE = "010920777000425628885:w-pq3ay14tk"
-# Custom Search Url
-CUSTOM_SEARCH_URL = "https://www.googleapis.com/customsearch/v1"
-
 # 指定したキーワードで検索した画像のURLを取得
 def get_image_urls(keyword, total_num):
     image_urls = []
     i = 0
     while i < total_num:
         # クエリの組み立て
-        query = CUSTOM_SEARCH_URL + "?key=" + API_KEY + \
-                "&cx=" + CUSTOM_SEARCH_ENGINE + "&num=" + \
+        query = CUSTOM_SEARCH_URL + "?key=" + settings.API_KEY + \
+                "&cx=" + settings.CUSTOM_SEARCH_ENGINE + "&num=" + \
                 str(10 if(total_num-i)>10 else (total_num-i)) + "&start=" + \
                 str(i+1) + "&q=" + quote(keyword) + "&searchType=image"
         print (query)
@@ -84,9 +78,14 @@ def save_image(filename, image):
     with open(filename, "wb") as file:
         file.write(image)
 
-ORIGIN_IMAGE_DIR = "./origin_image"
 RETURN_SUCCESS = 0
 RETURN_FAILURE = -1
+
+# Custom Search Url
+CUSTOM_SEARCH_URL = "https://www.googleapis.com/customsearch/v1"
+
+# Download Directory Path
+ORIGIN_IMAGE_DIR = "./origin_image"
 
 def main():
     print("===================================================================")
@@ -97,7 +96,7 @@ def main():
     # 引数のチェック
     argvs = sys.argv
     if len(argvs) != 2 or len(argvs[1]) == 0:
-        print("エラー：キーワードを指定してください。")
+        print("キーワードを指定してください。")
         return RETURN_FAILURE
 
     # キーワードの取得
@@ -119,4 +118,4 @@ def main():
     return RETURN_SUCCESS
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
