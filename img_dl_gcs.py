@@ -7,13 +7,31 @@ from urllib.parse import quote
 
 # https://qiita.com/too-ai/items/4fad0239b8b3c465fe6d
 # https://blog.aidemy.net/entry/2017/12/17/214715
+
 # 画像
 # https://qiita.com/onlyzs/items/c56fb76ce43e45c12339
 # https://github.com/onlyzs89/study/blob/master/collectImagenet.py
+
 # ノウハウ
 # https://note.nkmk.me/python-split-strip-list-join/
 # https://note.nkmk.me/python-f-strings/
-#$ pip install --upgrade google-api-python-client
+
+# pip install --upgrade google-api-python-client
+# pip install python-dotenv
+
+# git add -A
+# git commit -m "xxxxx"
+# git remote add origin https://github.com/xxxx/xxxxx.git
+# git fetch
+# git merge --allow-unrelated-histories origin/master
+# git push origin master
+
+# 以下のメッセージが出てGitHubにソースコードをPush出来ない
+# push declined due to email privacy restrictions
+# git config --global user.email USER_INFO@users.noreply.github.com
+# git commit --amend --reset-author
+# USER_INFO@users.noreply.github.comについて
+# Personal settings > Emails > Primary email addressに記載されいている
 
 # 指定したキーワードで検索した画像のURLを取得
 def get_image_urls(keyword, total_num):
