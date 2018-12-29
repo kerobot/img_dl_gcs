@@ -16,22 +16,19 @@ from urllib.parse import quote
 # https://note.nkmk.me/python-split-strip-list-join/
 # https://note.nkmk.me/python-f-strings/
 
-# pip install --upgrade google-api-python-client
-# pip install python-dotenv
+# git clone <<URL>>
 
+# git status
 # git add -A
+# git status
 # git commit -m "xxxxx"
-# git remote add origin https://github.com/xxxx/xxxxx.git
-# git fetch
-# git merge --allow-unrelated-histories origin/master
+# git remote add origin <<URL>>
 # git push origin master
 
-# 以下のメッセージが出てGitHubにソースコードをPush出来ない
-# push declined due to email privacy restrictions
-# git config --global user.email USER_INFO@users.noreply.github.com
-# git commit --amend --reset-author
-# USER_INFO@users.noreply.github.comについて
-# Personal settings > Emails > Primary email addressに記載されいている
+# git fetch
+# git merge --allow-unrelated-histories origin/master
+
+# git pull origin master
 
 # 指定したキーワードで検索した画像のURLを取得
 def get_image_urls(keyword, total_num):
