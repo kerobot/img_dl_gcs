@@ -1,17 +1,18 @@
 # img_dl_gcs
 
 Download Image File by Google Custom Search API
+
 Googleカスタム検索APIを利用して画像ファイルをダウンロードします。
 
-事前に Google API KEY と カスタム検索 の 検索エンジンID を用意しておく。
+事前に Google API KEY と カスタム検索 の 検索エンジンID を用意しておくこと。
 
 ## 環境
 
-Windows 10 x64 1809
-Python 3.7.1 x64
-Power Shell 6 x64
-Visual Studio Code x64
-Git for Windows x64
+* Windows 10 x64 1809
+* Python 3.7.1 x64
+* Power Shell 6 x64
+* Visual Studio Code x64
+* Git for Windows x64
 
 ## 構築
 
