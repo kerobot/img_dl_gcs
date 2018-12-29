@@ -52,7 +52,7 @@ def get_image_urls(keyword, total_num):
     return image_urls
 
 # 画像のURLをもとに画像をダウンロードして保存
-def get_image_files(dir_path, keyword, image_urls):
+def get_image_files(dir_path, keyword_count, image_urls):
     # 画像urlループ
     for i in range(len(image_urls)):
         try:
@@ -63,7 +63,7 @@ def get_image_files(dir_path, keyword, image_urls):
             filename_extension_pair = os.path.splitext(image_urls[i])
             extension = filename_extension_pair[1]
             extension = extension if len(extension) <= 4 else extension[0:4]
-            filename = os.path.join(dir_path, keyword+"_"+f"{i+1:03}"+extension)
+            filename = os.path.join(dir_path, f"image{keyword_count:02}_{i+1:03}{extension}")
             print(filename)
             # 画像をファイルとして保存
             save_image(filename, image)
@@ -95,23 +95,21 @@ def save_image(filename, image):
 
 RETURN_SUCCESS = 0
 RETURN_FAILURE = -1
-
 # Custom Search Url
 CUSTOM_SEARCH_URL = "https://www.googleapis.com/customsearch/v1"
-
 # Download Directory Path
 ORIGIN_IMAGE_DIR = "./origin_image"
 
 def main():
     print("===================================================================")
     print("イメージダウンローダー Google Customr Search API 版")
-    print("指定したキーワードに一致する画像ファイルをダウンロードします。")
+    print("指定したキーワードで検索した画像ファイルをダウンロードします。")
     print("===================================================================")
 
     # 引数のチェック
     argvs = sys.argv
     if len(argvs) != 2 or len(argvs[1]) == 0:
-        print("キーワードを指定してください。")
+        print("キーワードを指定してください。（カンマ区切り可能）")
         return RETURN_FAILURE
 
     # キーワードの取得
@@ -122,13 +120,16 @@ def main():
         os.mkdir(ORIGIN_IMAGE_DIR)
 
     # キーワードごとに画像ファイル取得
+    keyword_count = 1
     for keyword in keywords:
         # キーワード表示
-        print(keyword)
+        print(f"キーワード「{keyword}」で検索した画像ファイルをダウンロードします。")
         # 画像URL取得
         image_urls = get_image_urls(keyword, 100)
-        # 画像ファイルダウンロード
-        get_image_files(ORIGIN_IMAGE_DIR, keyword, image_urls)
+        # 画像ファイルのダウンロード
+        get_image_files(ORIGIN_IMAGE_DIR, keyword_count, image_urls)
+        # カウントアップ
+        keyword_count = keyword_count + 1
 
     return RETURN_SUCCESS
 
