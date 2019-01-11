@@ -63,7 +63,7 @@ def get_image_files(dir_path, keyword_count, image_urls):
             filename_extension_pair = os.path.splitext(image_urls[i])
             extension = filename_extension_pair[1]
             extension = extension if len(extension) <= 4 else extension[0:4]
-            filename = os.path.join(dir_path, f"image{keyword_count:02}_{i+1:03}{extension}")
+            filename = os.path.join(dir_path, f"{keyword_count:02}_{i+1:03}{extension}")
             print(filename)
             # 画像をファイルとして保存
             save_image(filename, image)
@@ -134,4 +134,4 @@ def main():
     return RETURN_SUCCESS
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
