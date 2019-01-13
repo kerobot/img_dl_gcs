@@ -5,30 +5,21 @@ import settings
 import requests
 from urllib.parse import quote
 
-# https://qiita.com/too-ai/items/4fad0239b8b3c465fe6d
-# https://blog.aidemy.net/entry/2017/12/17/214715
-
-# 画像
-# https://qiita.com/onlyzs/items/c56fb76ce43e45c12339
-# https://github.com/onlyzs89/study/blob/master/collectImagenet.py
-
-# ノウハウ
-# https://note.nkmk.me/python-split-strip-list-join/
-# https://note.nkmk.me/python-f-strings/
-
+#-----------------------------------------------------
 # git clone <<URL>>
-
+#-----------------------------------------------------
 # git status
 # git add -A
 # git status
 # git commit -m "xxxxx"
 # git remote add origin <<URL>>
 # git push origin master
-
+#-----------------------------------------------------
 # git fetch
 # git merge --allow-unrelated-histories origin/master
-
+#-----------------------------------------------------
 # git pull origin master
+#-----------------------------------------------------
 
 # 指定したキーワードで検索した画像のURLを取得
 def get_image_urls(keyword, total_num):

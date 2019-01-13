@@ -9,7 +9,7 @@ Googleカスタム検索APIを利用して画像ファイルをダウンロー�
 ## 環境
 
 * Windows 10 x64 1809
-* Python 3.7.1 x64
+* Python 3.6.5 x64
 * Power Shell 6 x64
 * Visual Studio Code x64
 * Git for Windows x64
@@ -58,5 +58,5 @@ Googleカスタム検索APIを利用して画像ファイルをダウンロー�
 > 10件ごとのクエリを10回実行（最大100ファイル取得）
 
 ```powershell
-> python .\img_dl_gcs.py 橘南桜
+> python .\img_dl_gcs.py 橘南桜,橘莉子,橘咲希
 ```
