@@ -1,7 +1,5 @@
 # img_dl_gcs
 
-Download Image File by Google Custom Search API
-
 Googleカスタム検索APIを利用して画像ファイルをダウンロードします。
 
 事前に Google API KEY と カスタム検索 の 検索エンジンID を用意しておくこと。
