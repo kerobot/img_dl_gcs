@@ -1,9 +1,8 @@
 import os
 import sys
-import json
-import settings
-import requests
 from urllib.parse import quote
+import requests
+import settings
 
 #-----------------------------------------------------
 # git clone <<URL>>
@@ -29,9 +28,9 @@ def get_image_urls(keyword, total_num):
         # クエリの組み立て
         query = CUSTOM_SEARCH_URL + "?key=" + settings.API_KEY + \
                 "&cx=" + settings.CUSTOM_SEARCH_ENGINE + "&num=" + \
-                str(10 if(total_num-i)>10 else (total_num-i)) + "&start=" + \
+                str(10 if(total_num-i) > 10 else (total_num-i)) + "&start=" + \
                 str(i+1) + "&q=" + quote(keyword) + "&searchType=image"
-        print (query)
+        print(query)
         # GETリクエスト
         response = requests.get(query)
         # JSONデータ取得
@@ -39,34 +38,34 @@ def get_image_urls(keyword, total_num):
         # 10件ずつのURLを格納
         for j in range(len(json["items"])):
             image_urls.append(json["items"][j]["link"])
-        i=i+10
+        i = i + 10
     return image_urls
 
 # 画像のURLをもとに画像をダウンロードして保存
 def get_image_files(dir_path, keyword_count, image_urls):
     # 画像urlループ
-    for i in range(len(image_urls)):
+    for (idx, image_url) in enumerate(image_urls):
         try:
             # 画像をダウンロード
-            print(image_urls[i])
-            image = download_image(image_urls[i])
+            print(image_url)
+            image = download_image(image_url)
             # ファイル名を作成
-            filename_extension_pair = os.path.splitext(image_urls[i])
+            filename_extension_pair = os.path.splitext(image_url)
             extension = filename_extension_pair[1]
             extension = extension if len(extension) <= 4 else extension[0:4]
-            filename = os.path.join(dir_path, f"{keyword_count:02}_{i+1:03}{extension}")
+            filename = os.path.join(dir_path, f"{keyword_count:02}_{idx+1:03}{extension}")
             print(filename)
             # 画像をファイルとして保存
             save_image(filename, image)
-        except RuntimeError as e:
-            print(f"type:{type(e)}")
-            print(f"args:{e.args}")
-            print(f"{e}")
+        except RuntimeError as ex:
+            print(f"type:{type(ex)}")
+            print(f"args:{ex.args}")
+            print(f"{ex}")
             continue
-        except BaseException as e:
-            print(f"type:{type(e)}")
-            print(f"args:{e.args}")
-            print(f"{e}")
+        except BaseException as ex:
+            print(f"type:{type(ex)}")
+            print(f"args:{ex.args}")
+            print(f"{ex}")
             continue
 
 # 画像をダウンロード
@@ -84,6 +83,16 @@ def save_image(filename, image):
     with open(filename, "wb") as file:
         file.write(image)
 
+# ディレクトリまたはディレクトリ内のファイル削除
+def delete_dir(dir_path, is_delete_top_dir=True):
+    for root, dirs, files in os.walk(dir_path, topdown=False):
+        for name in files:
+            os.remove(os.path.join(root, name))
+        for name in dirs:
+            os.rmdir(os.path.join(root, name))
+    if is_delete_top_dir:
+        os.rmdir(dir_path)
+
 RETURN_SUCCESS = 0
 RETURN_FAILURE = -1
 # Custom Search Url
@@ -99,7 +108,7 @@ def main():
 
     # 引数のチェック
     argvs = sys.argv
-    if len(argvs) != 2 or len(argvs[1]) == 0:
+    if len(argvs) != 2 or not argvs[1]:
         print("キーワードを指定してください。（カンマ区切り可能）")
         return RETURN_FAILURE
 
@@ -107,8 +116,9 @@ def main():
     keywords = [x.strip() for x in argvs[1].split(',')]
 
     # ディレクトリの作成
-    if os.path.isdir(ORIGIN_IMAGE_DIR) == False:
+    if not os.path.isdir(ORIGIN_IMAGE_DIR):
         os.mkdir(ORIGIN_IMAGE_DIR)
+    delete_dir(ORIGIN_IMAGE_DIR, False)
 
     # キーワードごとに画像ファイル取得
     keyword_count = 1
