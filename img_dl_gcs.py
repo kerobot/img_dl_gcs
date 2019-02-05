@@ -4,22 +4,6 @@ from urllib.parse import quote
 import requests
 import settings
 
-#-----------------------------------------------------
-# git clone <<URL>>
-#-----------------------------------------------------
-# git status
-# git add -A
-# git status
-# git commit -m "xxxxx"
-# git remote add origin <<URL>>
-# git push origin master
-#-----------------------------------------------------
-# git fetch
-# git merge --allow-unrelated-histories origin/master
-#-----------------------------------------------------
-# git pull origin master
-#-----------------------------------------------------
-
 # 指定したキーワードで検索した画像のURLを取得
 def get_image_urls(keyword, total_num):
     image_urls = []
