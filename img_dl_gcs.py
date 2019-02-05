@@ -22,7 +22,7 @@ def get_image_urls(keyword, total_num):
         # 10件ずつのURLを格納
         for j in range(len(json["items"])):
             image_urls.append(json["items"][j]["link"])
-        i = i + 10
+        i += 10
     return image_urls
 
 # 画像のURLをもとに画像をダウンロードして保存
@@ -42,13 +42,13 @@ def get_image_files(dir_path, keyword_count, image_urls):
             # 画像をファイルとして保存
             save_image(filename, image)
         except RuntimeError as ex:
-            print(f"type:{type(ex)}")
-            print(f"args:{ex.args}")
+            # print(f"type:{type(ex)}")
+            # print(f"args:{ex.args}")
             print(f"{ex}")
             continue
         except BaseException as ex:
-            print(f"type:{type(ex)}")
-            print(f"args:{ex.args}")
+            # print(f"type:{type(ex)}")
+            # print(f"args:{ex.args}")
             print(f"{ex}")
             continue
 
@@ -105,7 +105,7 @@ def main():
     delete_dir(ORIGIN_IMAGE_DIR, False)
 
     # キーワードごとに画像ファイル取得
-    keyword_count = 1
+    keyword_count = 0
     for keyword in keywords:
         # キーワード表示
         print(f"キーワード「{keyword}」で検索した画像ファイルをダウンロードします。")
@@ -114,7 +114,7 @@ def main():
         # 画像ファイルのダウンロード
         get_image_files(ORIGIN_IMAGE_DIR, keyword_count, image_urls)
         # カウントアップ
-        keyword_count = keyword_count + 1
+        keyword_count += 1
 
     return RETURN_SUCCESS
 
